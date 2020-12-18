@@ -1,0 +1,22 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"isBackground": true,
+			"type": "npm",
+			"script": "start",
+			"problemMatcher": {
+				"pattern": {
+					"regexp": "^([^\\s].*)\\((\\d+|\\,\\d+|\\d+,\\d+,\\d+,\\d+)\\):\\s+(error|warning|info)\\s+(TS\\d+)\\s*:\\s*(.*)$"
+				},
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": ".",
+					"endsPattern": "Version: webpack.+"
+				}
+			},
+			"label": "debug",
+			"detail": "webpack-dev-server --history-api-fallback --mode development --open"
+		}
+	]
+}
