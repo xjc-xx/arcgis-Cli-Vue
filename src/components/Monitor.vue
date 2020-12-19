@@ -1,10 +1,10 @@
 <!--
  * @Author: CC-TSR
  * @Date: 2020-12-18 09:26:39
- * @LastEditTime: 2020-12-18 20:10:20
+ * @LastEditTime: 2020-12-19 15:36:34
  * @LastEditors: xiejiancheng1999@qq.com
  * @Description: 
- * @FilePath: \arcgis-cli-demo\src\components\Monitor.vue
+ * @FilePath: \arcgis-cli-vue\src\components\Monitor.vue
  * @可以输入预定的版权声明、个性签名、空行等
 -->
 <template>
@@ -48,8 +48,8 @@ $white: #fff;
 }
 .el-row {
     margin-bottom: 5px;
-    &:last-child {
-        margin-bottom: 0;
+    &:first-child {
+        margin-bottom: 20px;
     }
 }
 .el-col {
@@ -68,7 +68,7 @@ $white: #fff;
     padding-left: 15px;
 }
 .bg-purple-light {
-    background: #e5e9f2;
+    background: #cdd8f3;
     font-size: 12px;
     padding-right: 7px;
     text-align: right;
