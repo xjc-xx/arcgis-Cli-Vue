@@ -1,7 +1,7 @@
 /*
  * @Author: CC-TSR
  * @Date: 2020-12-18 08:58:26
- * @LastEditTime: 2020-12-19 00:36:32
+ * @LastEditTime: 2020-12-19 11:44:55
  * @LastEditors: xiejiancheng1999@qq.com
  * @Description: 
  * @FilePath: \arcgis-cli-demo\src\data\map.ts
@@ -158,7 +158,7 @@ export const legend = new Expand({
 
 // var _container: HTMLDivElement = null
 /**
- * Assigns the container element to the View
+ * 将容器元素分配给视图
  * @param container
  */
 export const initialize = (container: HTMLDivElement, container3d: HTMLDivElement, widget: HTMLDivElement) => {
@@ -166,34 +166,30 @@ export const initialize = (container: HTMLDivElement, container3d: HTMLDivElemen
     scene.ui.add([widget, slidesDiv]);
     view.container = container;
     scene.container = container3d
+    
     view.when()
         .then(_ => {
+            view.ui.remove("attribution");
             console.log('Map and View are ready');
         })
         .catch(error => {
             console.warn('An error in creating the map occured:', error);
         });
+
     scene.when()
         .then(_ => {
-            console.log('Scene and View are ready');
+            scene.ui.remove("attribution");
             document.getElementById("slidesDiv").style.visibility = "visible";
-            console.log(document.getElementById("createSlideButton"))
-            /*********************************************************************
-             * The slides are a collection inside the presentation property of
-             * the WebScene.
-             *********************************************************************/
+
+            //  网络场景的 slides 存储在 webScene 的 presentation 属性里
             var slides = webScene.presentation.slides;
 
-            /*********************************************************************
-             * Loop through each slide in the collection and render the slide
-             *********************************************************************/
+
+            // 循环渲染每张幻灯片
             slides.forEach(createSlideUI);
-            
-            /*********************************************************************
-             * Create a new slide using Slide.createFrom after clicking on the
-             * create slide button, using the text from the title input for the
-             * title of the slide.
-             *********************************************************************/
+
+  
+            // 按钮绑定创建幻灯片事件
             document
                 .getElementById("createSlideButton")
                 .addEventListener("click", function () {
