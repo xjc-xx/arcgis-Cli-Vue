@@ -1,7 +1,7 @@
 /*
  * @Author: CC-TSR
  * @Date: 2020-12-18 08:58:26
- * @LastEditTime: 2020-12-19 11:44:55
+ * @LastEditTime: 2020-12-20 14:37:25
  * @LastEditors: xiejiancheng1999@qq.com
  * @Description: 
  * @FilePath: \arcgis-cli-demo\src\data\map.ts
@@ -50,7 +50,7 @@ scene.ui.add(layerList, 'top-right');
 view.ui.add(layerList2D, 'top-right');
 scene.popup.autoOpenEnabled = true;
 scene.popup.dockOptions = {
-    // Dock the popup when the size of the view is less than or equal to 600x1000 pixels
+    // 当视图的大小小于或等于600x1000像素时，停靠弹出窗口
     breakpoint: {
         width: 300,
         height: 300
@@ -69,101 +69,70 @@ slidesDiv.style.justifyContent = "center";
 slidesDiv.id = "slidesDiv";
 
 /*********************************************************************
- * Function to create the UI for a slide by creating DOM nodes and
- * adding them to the slidesDiv container.
+ * 通过创建DOM节点和创建幻灯片的UI的功能
+ * 并将它们添加到slidesDiv容器中
  *********************************************************************/
 function createSlideUI(slide: any, placement: any) {
     /*********************************************************************
-     * Create a new <div> element which contains all the slide information.
-     * Store a reference to the created DOM node so we can use it to place
-     * other DOM nodes and connect events.
+     * 创建一个包含所有幻灯片信息的新<div>元素。
+     * 存储对创建的DOM节点的引用，以便我们可以使用它来放置
+     * 其他DOM节点和连接事件。
      *********************************************************************/
     var slideElement = document.createElement("div");
-    // Assign the ID of the slide to the <span> element
+
     slideElement.id = slide.id;
     slideElement.classList.add("slide");
 
-    /*********************************************************************
-     * Place the newly created DOM node cat the beginning of the slidesDiv
-     *********************************************************************/
     if (placement === "first") {
         slidesDiv.insertBefore(slideElement, slidesDiv.firstChild);
     } else {
         slidesDiv.appendChild(slideElement);
     }
 
-    /*********************************************************************
-     * Create a <div> element to contain the slide title text
-     *********************************************************************/
     var title = document.createElement("div");
     title.innerText = slide.title.text;
-    // Place the title of the slide in the <div> element
+
     slideElement.appendChild(title);
 
-    /*********************************************************************
-     * Create a new <img> element and place it inside the newly created slide
-     * element. This will reference the thumbnail from the slide.
-     *********************************************************************/
     var img = new Image();
-    // Set the src URL of the image to the thumbnail URL of the slide
     img.src = slide.thumbnail.url;
-    // Set the title property of the image to the title of the slide
     img.title = slide.title.text;
-    // Place the image inside the new <div> element
+
     slideElement.appendChild(img);
 
-    /*********************************************************************
-     * Set up a click event handler on the newly created slide. When clicked,
-     * the code defined below will execute.
-     *********************************************************************/
+
     slideElement.addEventListener("click", function () {
-        /*******************************************************************
-         * Remove the "active" class from all elements with the .slide class
-         *******************************************************************/
+
         var slides = document.querySelectorAll(".slide");
         Array.from(slides).forEach(function (node) {
             node.classList.remove("active");
         });
 
-        /*******************************************************************
-         * Add the "active" class on the current element being selected
-         *******************************************************************/
+
         slideElement.classList.add("active");
 
         /******************************************************************
-         * Applies a slide's settings to the SceneView.
-         *
-         * Each slide has a viewpoint and visibleLayers property that define
-         * the point of view or camera for the slide and the layers that should
-         * be visible to the user when the slide is selected. This method
-         * allows the user to animate to the given slide's viewpoint and turn
-         * on its visible layers and basemap layers in the view.
+        * 将幻灯片的设置应用于SceneView。
+            * 每张幻灯片都有一个viewpoint和visibleLayers属性，它们定义了
+            * 幻灯片或应包含的图层的视角或摄影机
+            * 在选择幻灯片时对用户可见。这个方法
+            * 允许用户动画化给定幻灯片的视点并旋转
+            * 在视图的可见图层和底图图层上。 
          ******************************************************************/
         slide.applyTo(scene);
     });
 }
 
-// add a legend widget instance to the view
-// and set the style to 'card'. This is a
-// responsive style, which is good for mobile devices
-export const legend = new Expand({
-    content: new Legend({
-        view,
-        style: 'card'
-    }),
-    view,
-    expanded: true
-});
 
 
-// var _container: HTMLDivElement = null
 /**
- * 将容器元素分配给视图
+ * 将容器元素分配给View和Scene
  * @param container
  */
 export const initialize = (container: HTMLDivElement, container3d: HTMLDivElement, widget: HTMLDivElement) => {
     container3d.parentElement.appendChild(slidesDiv)
-    scene.ui.add([widget, slidesDiv]);
+    scene.ui.add(slidesDiv);
+    scene.ui.add(widget, "top-right");
     view.container = container;
     scene.container = container3d
     
@@ -193,31 +162,15 @@ export const initialize = (container: HTMLDivElement, container3d: HTMLDivElemen
             document
                 .getElementById("createSlideButton")
                 .addEventListener("click", function () {
-                    /*******************************************************************
-                     * Use the Slide.createFrom static method to create a new slide which
-                     * contains a snapshot (visible layers, basemap, camera) of the
-                     * current view. This method returns a Promise which resolves with a
-                     * new Slide instance once the slide as been successfully created.
-                     *******************************************************************/
+
                     Slide.createFrom(scene).then(function (slide) {
-                        /*****************************************************************
-                         * Set the slide title
-                         *****************************************************************/
+
                         slide.title.text = document.getElementById(
                             "createSlideTitleInput"
                         ).value;
 
-                        /*****************************************************************
-                         * Add the slide to the slides collection of the scene presentation
-                         * such that if the scene were to published back to the portal, the
-                         * newly created slide would be correctly persisted as part of the
-                         * WebScene
-                         *****************************************************************/
                         webScene.presentation.slides.add(slide);
 
-                        /*****************************************************************
-                         * Create UI for the slide and present it to the user
-                         *****************************************************************/
                         createSlideUI(slide, "first");
                     });
                 });

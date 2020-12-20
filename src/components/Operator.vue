@@ -1,10 +1,10 @@
 <!--
  * @Author: CC-TSR
  * @Date: 2020-12-18 09:26:39
- * @LastEditTime: 2020-12-18 21:57:02
+ * @LastEditTime: 2020-12-19 15:31:12
  * @LastEditors: xiejiancheng1999@qq.com
  * @Description: 
- * @FilePath: \arcgis-cli-demo\src\components\Operator.vue
+ * @FilePath: \arcgis-cli-vue\src\components\Operator.vue
  * @可以输入预定的版权声明、个性签名、空行等
 -->
 <template>
@@ -13,20 +13,18 @@
             <el-col :span="24"><div class="grid-content bg-purple-dark">地图分析</div></el-col>
         </el-row>
         <el-row>
-            <el-col :span="18"><div class="grid-content bg-purple"><i class="el-icon-location-information" />快速分析工具<i class="el-icon-location-information" /></div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple-light">1000万亩</div></el-col>
+            <el-col :span="24"><div class="grid-content bg-purple"><i class="el-icon-location-information" />快速分析工具<i class="el-icon-location-information" /></div></el-col>
         </el-row>
         <el-row>
-            <el-col :span="18"><div class="grid-content bg-purple">城乡建设用地面积（2020）</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple-light">1000万亩</div></el-col>
+            <el-col :span="24"><div class="grid-content bg-purple">城乡建设用地面积（2020）</div></el-col>
+           
         </el-row>
         <el-row>
-            <el-col :span="18"><div class="grid-content bg-purple">永久基本农田保护面积（2019）</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple-light">1000万亩</div></el-col>
+            <el-col :span="24"><div class="grid-content bg-purple">永久基本农田保护面积（2019）</div></el-col>
+            
         </el-row>
         <el-row>
-            <el-col :span="18"><div class="grid-content bg-purple">自然岸线保有率（2018）</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple-light">99%</div></el-col>
+            <el-col :span="24"><div class="grid-content bg-purple">自然岸线保有率（2018）</div></el-col>
         </el-row>
     </div>
 </template>
