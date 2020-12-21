@@ -1,37 +1,56 @@
 <!--
  * @Author: CC-TSR
  * @Date: 2020-12-18 09:26:39
- * @LastEditTime: 2020-12-19 15:31:12
+ * @LastEditTime: 2020-12-21 22:17:58
  * @LastEditors: xiejiancheng1999@qq.com
  * @Description: 
- * @FilePath: \arcgis-cli-vue\src\components\Operator.vue
+ * @FilePath: \arcgis-cli-demo\src\components\Operator.vue
  * @可以输入预定的版权声明、个性签名、空行等
 -->
 <template>
     <div id="Operator">
         <el-row>
-            <el-col :span="24"><div class="grid-content bg-purple-dark">地图分析</div></el-col>
+            <el-col :span="24">
+                <div class="grid-content bg-purple-dark">地图分析</div>
+            </el-col>
         </el-row>
         <el-row>
-            <el-col :span="24"><div class="grid-content bg-purple"><i class="el-icon-location-information" />快速分析工具<i class="el-icon-location-information" /></div></el-col>
+            <el-col :span="24"
+                ><div class="grid-content bg-purple opreator-tool">
+                    <em class="el-icon-location-information" /> 快速分析工具
+                    <em class="el-icon-location-information" /></div
+            ></el-col>
         </el-row>
         <el-row>
-            <el-col :span="24"><div class="grid-content bg-purple">城乡建设用地面积（2020）</div></el-col>
-           
-        </el-row>
-        <el-row>
-            <el-col :span="24"><div class="grid-content bg-purple">永久基本农田保护面积（2019）</div></el-col>
-            
-        </el-row>
-        <el-row>
-            <el-col :span="24"><div class="grid-content bg-purple">自然岸线保有率（2018）</div></el-col>
+            <el-col :span="24">
+                <div class="grid-content bg-purple opreator-tool" @click="controlSnow">
+                    <em class="el-icon-light-rain" /> {{ txtControlSonw }} <em class="el-icon-light-rain" />
+                </div>
+            </el-col>
         </el-row>
     </div>
 </template>
 
 <script lang='ts'>
+import bus from '../assets/eventBus';
 export default {
-    name: 'Monitor'
+    name: 'Operator',
+    data: function () {
+        return {
+            isSnow: false
+        };
+    },
+    methods: {
+        controlSnow() {
+            this.isSnow = !this.isSnow;
+            bus.$emit('controlSnow', this.isSnow);
+        }
+    },
+    computed: {
+        txtControlSonw: function () {
+            return this.isSnow ? '雪快停吧' : '快下雪吧';
+        }
+    }
 };
 </script>
 
@@ -42,8 +61,15 @@ $white: #fff;
 #Operator {
     width: 20%;
     height: 93%;
-    background-color:   #e5e9f2;
+    background-color: #e5e9f2;
 }
+
+.opreator-tool:hover {
+    background: rgb(100, 100, 100);
+    color: white;
+    cursor: pointer;
+}
+
 .el-row {
     margin-bottom: 5px;
     &:last-child {
