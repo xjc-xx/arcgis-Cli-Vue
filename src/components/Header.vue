@@ -1,10 +1,10 @@
 <!--
  * @Author: CC-TSR
  * @Date: 2020-12-18 08:58:26
- * @LastEditTime: 2020-12-18 23:03:18
+ * @LastEditTime: 2020-12-19 17:12:38
  * @LastEditors: xiejiancheng1999@qq.com
  * @Description: 
- * @FilePath: \arcgis-cli-demo\src\components\Header.vue
+ * @FilePath: \arcgis-cli-vue\src\components\Header.vue
  * @可以输入预定的版权声明、个性签名、空行等
 -->
 <template>
@@ -20,7 +20,7 @@
         </span>
         <span :class="[isActive == 3 ? 'active' : 's-icon']" @click="active(3)">
             <i class="el-icon-edit-outline"></i>
-            <span class="icon-name">{{opreator}}</span>
+            <span class="icon-name">{{ opreator }}</span>
         </span>
         <span :class="[isActive == 4 ? 'active' : 's-icon']" @click="active(4)">
             <i class="el-icon-s-grid"></i>
@@ -30,13 +30,13 @@
 </template>
 
 <script lang="ts">
-import bus from '../assets/eventBus'
+import bus from '../assets/eventBus';
 export default {
     name: 'Header',
     data: function () {
         return {
             isActive: 1,
-            opreator: "分析评价"
+            opreator: '分析评价'
         };
     },
     props: {
@@ -57,8 +57,8 @@ export default {
                     bus.$emit('changeTo3D');
                     break;
                 case 3:
-                    if(this.opreator == "分析评价") this.opreator = "关闭分析工具"
-                    else this.opreator = "分析评价";
+                    if (this.opreator == '分析评价') this.opreator = '关闭分析工具';
+                    else this.opreator = '分析评价';
                     this.$emit('showOperator');
                     break;
                 case 4:
@@ -72,7 +72,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$blue: #1eacbe;
 $gray: #959595;
 $white: #fff;
 $active: #2a95be;
@@ -81,7 +80,7 @@ $holding: #8ec0c9;
 header {
     flex: 0 1 100%;
     display: flex;
-    background-color: $blue;
+    background: linear-gradient(to right,  #4ce9fe,#6fd1fe);
     color: $white;
     width: 100%;
     height: 7%;
@@ -97,6 +96,7 @@ header {
         height: 40px;
         line-height: 40px;
     }
+    border: 0;
 }
 .s-icon {
     margin-left: 20px;
