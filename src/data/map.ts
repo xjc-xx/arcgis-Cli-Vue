@@ -1,4 +1,12 @@
-
+/*
+ * @Author: CC-TSR
+ * @Date: 2020-12-18 08:58:26
+ * @LastEditTime: 2020-12-20 14:37:25
+ * @LastEditors: xiejiancheng1999@qq.com
+ * @Description: 
+ * @FilePath: \arcgis-cli-demo\src\data\map.ts
+ * @可以输入预定的版权声明、个性签名、空行等
+ */
 import MapView from 'esri/views/MapView';
 import SceneView from 'esri/views/SceneView';
 import WebMap from 'esri/WebMap';
@@ -127,10 +135,10 @@ export const initialize = (container: HTMLDivElement, container3d: HTMLDivElemen
     scene.ui.add(widget, "top-right");
     view.container = container;
     scene.container = container3d
-
+    
     view.when()
         .then(_ => {
-            view.ui.remove("attribution")
+            view.ui.remove("attribution");
             console.log('Map and View are ready');
         })
         .catch(error => {
@@ -139,17 +147,18 @@ export const initialize = (container: HTMLDivElement, container3d: HTMLDivElemen
 
     scene.when()
         .then(_ => {
-            console.log('Scene and View are ready');
-            scene.ui.remove("attribution")
+            scene.ui.remove("attribution");
             document.getElementById("slidesDiv").style.visibility = "visible";
-            console.log(document.getElementById("createSlideButton"))
 
+            //  网络场景的 slides 存储在 webScene 的 presentation 属性里
             var slides = webScene.presentation.slides;
 
 
+            // 循环渲染每张幻灯片
             slides.forEach(createSlideUI);
 
-
+  
+            // 按钮绑定创建幻灯片事件
             document
                 .getElementById("createSlideButton")
                 .addEventListener("click", function () {
